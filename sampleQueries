@@ -1,0 +1,75 @@
+--------- ranger stuff ---------
+
+select requestuser, count(*)  from rangerkudu  
+group by requestuser
+order by count(*) desc;
+
+-- last time a table/column was accessed 
+select resourcepath , max(eventtime)  from rangerkudu
+where resourcepath not like "%rangerkudu%"
+and resourcepath not like "%system%"
+group by resourcepath
+order by max(eventtime) 
+--asc;
+desc;
+
+--delete from rangerkudu where 1=1;
+
+--select * from rangerkudu   ;
+
+--select * from yarnjobs;
+
+select * from impalaqueries 
+order by starttime desc;
+
+select requestuser, requestdata from rangerkudu
+where requestuser like "marty" and 
+resourcepath like "%sample%"
+order by eventti
+;
+
+-- last time a table/column was accessed 
+select requestuser, resourcepath , max(eventtime)  from rangerkudu
+where resourcepath not like "%rangerkudu%"
+and resourcepath not like "%system%"
+group by requestuser, resourcepath
+order by max(eventtime) 
+--asc;
+desc;
+
+--------------------- impala stuff ----------------------------------------
+
+select userid , cast ( sum (memory_per_node_peak)/1000000 as bigint) MemoryMB ,
+cast ( sum (  thread_cpu_time )/60 as bigint ) CPUsecs    
+from impalaqueries 
+where thread_cpu_time > 0
+and memory_per_node_peak > 0 
+--and starttime like "%2021-12-%"
+group by userid
+;
+
+select userid, count(*) from impalaqueries
+group by userid;
+
+
+
+--------------- yarn stuff ----------------------------
+
+select user, sum(allocatedmemoryseconds), sum(allocatedvcoreseconds) from yarnjobs
+where starttime like "2021-11-15%"
+group by user;
+
+select * from yarnjobs;
+
+delete from impalaqueries where userid like "%greg%";
+
+
+select userid, admission_result, querystate, sum(durationmillis) cputime, count(*)  from impalaqueries 
+
+--where querystate LIKE 'FINISHED'
+
+group by userid, admission_result, querystate
+order by cputime desc ; 
+
+
+
