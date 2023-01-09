@@ -16,4 +16,5 @@ Put the tolowerEscapequotes.py in a directory you choose and configure the execu
 
 A big thank you to John for Nifi and Jolt help.  A big thank you to Marcus for the XSLT. 
 
-(C) Copyright 2021 Martin Lurie
+(C) Copyright 2021 Martin Lurie, this is sample code, not supported, not a Cloudera product, sorry :-(
+
