@@ -1,3 +1,6 @@
+Do not use this - Ranger now puts out JSON, not XML
+
+
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <template encoding-version="1.3">
     <description>CM API data on YARN 
